@@ -1,1 +1,0 @@
-/Users/umurgedik/Applications/subvim/vim/
