@@ -1,79 +1,45 @@
-set nocompatible               " be iMproved
-syn on
-filetype off                   " required!
+call plug#begin('~/.vim/plugged')
+	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  Plug 'scrooloose/nerdcommenter'
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+	Plug 'fatih/vim-go', { 'tag': '*', 'for': 'go' }
 
-" let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
+  Plug 'rust-lang/rust.vim'
+      Plug 'prabirshrestha/asyncomplete.vim'
+      Plug 'prabirshrestha/async.vim'
+      Plug 'prabirshrestha/vim-lsp'
+      Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'vim-syntastic/syntastic'
+    Plug 'maralla/vim-toml-enhance'
+      Plug 'cespare/vim-toml'
+call plug#end()
+
+syntax on
+filetype plugin indent on
+set number
+set sw=2
+set ts=2
+set expandtab
 
 
+let mapleader=","
+nnoremap <leader>k :NERDTreeToggle<CR>
+map ; :
 
-filetype plugin indent on     " required!
-"
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
+let g:NERDTreeDirArrowExpandable="+"
+let g:NERDTreeDirArrowCollapsible="~"
 
-Bundle 'Enhanced-Javascript-syntax'
-Bundle 'Auto-Pairs'
-Bundle 'zencoding-vim'
-Bundle 'MatchTag'
-Bundle 'matchit.zip'
-Bundle 'The-NERD-tree'
-Bundle 'better-snipmate-snippet'
-Bundle 'Command-T'
-Bundle 'vim-slim'
-Bundle 'vim-coffee-script'
-Bundle 'coffee-check.vim'
-Bundle 'The-NERD-Commenter'
-Bundle 'scss-syntax'
-Bundle 'vim-stylus'
-Bundle 'Handlebars'
-Bundle 'ack.vim'
-Bundle 'nerdtree-ack'
-Bundle 'fugitive.vim'
-Bundle 'align-master'
-Bundle 'rails.vim'
+" GoLang
+let g:go_fmt_command = "goimports"
+au FileType go map <leader>i :GoInfo<CR>
 
-set ts=4
-set sw=4
-set nu
-
-color molokai
-
-set pastetoggle=<F2>
-set mouse=a
-
-nnoremap ; :
-nnoremap <F1> :NERDTree <CR>
-vnoremap <leader>p "_dP"
-
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
-
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-
-map <C-,> <C-y>,
-
-au BufNewFile,BufRead *.slim set filetype=slim
-au BufNewFile,BufRead *.coffee set filetype=coffee
-au BufNewFile,BufRead *.styl set filetype=stylus
-au BufNewFile,BufRead *.hbs set filetype=handlebars
-
-autocmd Filetype coffee setlocal ts=2 sts=2 sw=2
-autocmd Filetype coffee set expandtab
-
-autocmd Filetype handlebars setlocal ts=2 sts=2 sw=2
+" Rust
+let g:rustfmt_autosave = 1
+let g:lsp_signs_enabled = 1         " enable signs
+if executable('rls')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
