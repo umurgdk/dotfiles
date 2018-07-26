@@ -1,6 +1,9 @@
 call plug#begin('~/.vim/plugged')
 	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
   Plug 'scrooloose/nerdcommenter'
+  Plug 'itchyny/lightline.vim'
+  Plug 'tpope/vim-fugitive'
+  Plug 'junegunn/vim-easy-align'
 
   Plug 'rakr/vim-one'
   Plug 'junegunn/goyo.vim'
@@ -27,6 +30,7 @@ set sw=2
 set ts=2
 set expandtab
 set incsearch
+" set noshowmode "light line shows the mode
 
 function! s:goyo_enter()
   hi! StatusLineNC gui=NONE guifg=NONE guibg=NONE term=underline ctermfg=0
@@ -70,8 +74,25 @@ map <C-l> <C-W>l
 
 map <leader>z :Goyo <bar> highlight StatusLineNC ctermfg=black<CR>
 
+let g:easy_align_ignore_groups = ['String']
+vmap <Enter> <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
 let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="~"
+
+" Lightline
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ ['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified'] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
+
+" Markdown
+au FileType markdown vmap <leader>t :EasyAlign*<Bar><CR>
 
 " GoLang
 let g:go_fmt_command = "goimports"
@@ -88,3 +109,5 @@ if executable('rls')
         \ 'whitelist': ['rust'],
         \ })
 endif
+
+au FileType rust map <leader>i :LspHover<CR>
