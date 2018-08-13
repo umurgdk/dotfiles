@@ -4,6 +4,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'tpope/vim-fugitive'
   Plug 'junegunn/vim-easy-align'
+  Plug 'ctrlpvim/ctrlp.vim'
+
+  Plug 'arrufat/vala.vim'
 
   Plug 'rakr/vim-one'
   Plug 'junegunn/goyo.vim'
@@ -25,17 +28,24 @@ call plug#end()
 
 syntax on
 filetype plugin indent on
+set number
 set relativenumber
 set sw=2
 set ts=2
 set expandtab
 set incsearch
-" set noshowmode "light line shows the mode
+set foldmethod=syntax
+set formatoptions+=j
+" set noshowmode 
+" light line shows the mode
+
+let g:go_fmt_experimental = 1
 
 function! s:goyo_enter()
   hi! StatusLineNC gui=NONE guifg=NONE guibg=NONE term=underline ctermfg=0
 endfunction
 
+let g:goyo_width = 100
 au! User GoyoEnter
 au  User GoyoEnter nested call <SID>goyo_enter()
 
@@ -80,6 +90,13 @@ nmap ga <Plug>(EasyAlign)
 
 let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="~"
+
+" Fuzzy finder (aka Ctrl-P)
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+endif
 
 " Lightline
 let g:lightline = {
