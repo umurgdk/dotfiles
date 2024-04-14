@@ -9,9 +9,10 @@ require('lsp').setup()
 require('completion').setup()
 require('filetree').setup()
 
+require('reload_init')
 
 vim.o.termguicolors = true        -- enable 24-bit RGB color in the TUI
-vim.cmd.colorscheme('tokyonight-moon')
+vim.cmd.colorscheme('duskfox')
 
 -- vim.o.clipboard = 'unnamedplus'
 -- vim.o.completeopt = {'menu', 'menuone', 'noselect'}
@@ -23,8 +24,8 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
 -- User Interface
-vim.o.number = true               -- show absolute number
-vim.o.relativenumber = true       -- add numbers to each line on the left side
+vim.wo.number = true               -- show absolute number
+vim.wo.relativenumber = true       -- add numbers to each line on the left side
 vim.o.cursorline = true           -- highlight cursor line underneath the cursor horizontally
 vim.o.splitbelow = true           -- open new vertical split bottom
 vim.o.splitright = true           -- open new horizontal splits right
@@ -44,7 +45,24 @@ vim.o.backup = false
 vim.o.undodir = os.getenv("HOME") .. "/.nvim/undodir"
 vim.o.undofile = true
 
-vim.o.signcolumn = "yes"
+vim.wo.signcolumn = "yes"
 vim.o.scrolloff = 8
 vim.o.updatetime = 50
+
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+
+
+-- Setup format on save
+local format_on_save = require('format-on-save')
+local formatters = require('format-on-save.formatters')
+
+format_on_save.setup({
+    exclude_path_patterns = {
+        "/node_modules/",
+    },
+    formatter_by_ft = {
+        rust = formatters.lsp,
+    },
+})
 

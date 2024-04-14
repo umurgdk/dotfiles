@@ -9,7 +9,26 @@ function M.setup()
         M.setup_keybindings(client, bufnr)
     end)
 
-    lspz.setup_servers({'lua_ls', 'zls', 'rust_analyzer'})
+    lspz.format_on_save({
+        format_opts = {
+            async = false,
+            timout_ms = 10000,
+        }
+    })
+
+    require('lspconfig').rust_analyzer.setup({
+        ['rust-analyzer'] = {
+            settings = {
+                imports = {
+                    granularity = {
+                        enforce = true,
+                    }
+                }
+            }
+        }
+    })
+
+    lspz.setup_servers({'lua_ls', 'zls', 'rust_analyzer', 'emmet_language_server', 'dartls', 'sourcekit'})
     lspz.setup()
 
     M.setup_mason()
@@ -50,7 +69,7 @@ function M.setup_mason()
             'zls',
             'lua_ls',
             'rust_analyzer',
-            'clangd',
+            -- 'clangd',
         }
     })
 end

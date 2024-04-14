@@ -1,13 +1,12 @@
 return {
     setup = function()
         require('lazy').setup({
+            -- Colorschemes
             {'folke/tokyonight.nvim'},
+            {'rebelot/kanagawa.nvim'},
+            {'EdenEast/nightfox.nvim'},
 
             {'nvim-tree/nvim-tree.lua'},
-
-
-            {'williamboman/mason.nvim'},
-            {'williamboman/mason-lspconfig.nvim'},
 
             {'stewartimel/Metal-Vim-Syntax-Highlighting'},
             {'cormacrelf/vim-colors-github'},
@@ -78,8 +77,13 @@ return {
                 end
             },
 
+            -- Format on save
+            { "elentok/format-on-save.nvim" },
 
             -- LSP Support
+            {'williamboman/mason.nvim'},
+            {'williamboman/mason-lspconfig.nvim'},
+
             {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x', lazy = true, config = false },
             {'neovim/nvim-lspconfig', dependencies = {
                 {'hrsh7th/cmp-nvim-lsp'},
@@ -89,6 +93,15 @@ return {
             {'hrsh7th/nvim-cmp', dependencies = {
                 {'L3MON4D3/LuaSnip'},
             } },
+
+            -- Rust Cargo
+            {
+                'saecki/crates.nvim',
+                tag = 'stable',
+                config = function()
+                    require('crates').setup()
+                end,
+            }
         })
     end,
 
