@@ -7,6 +7,7 @@ vim.g.maplocalleader = " "
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
 
+vim.o.termguicolors = true
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -485,7 +486,13 @@ require("lazy").setup({
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			require("lspconfig").sourcekit.setup({})
+			require("lspconfig").zls.setup({
+				cmd = { "zls" },
+				filetypes = { "zig", "zon" },
+				root_dir = require("lspconfig.util").root_pattern("build.zig"),
+			})
 			local servers = {
+				ols = {},
 				-- clangd = {},
 				-- gopls = {},
 				-- pyright = {},
@@ -623,6 +630,7 @@ require("lazy").setup({
 			--  into multiple repos for maintenance purposes.
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
 		},
 		config = function()
 			-- See `:help cmp`
@@ -688,6 +696,7 @@ require("lazy").setup({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "path" },
+					{ name = "nvim_lsp_signature_help" },
 				},
 			})
 		end,

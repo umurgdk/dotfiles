@@ -1,0 +1,8 @@
+general.import = [
+	"~/.config/alacritty/themes/dawnfox.toml",
+	# "~/.config/alacritty/themes/duskfox.toml",
+]
+
+[font]
+size = 12
+
