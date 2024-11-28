@@ -1,3 +1,4 @@
+local PLUGIN_DEV_PATH = "~/src/nvim_plugins"
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -66,7 +67,7 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.inccommand = "split"
 
 -- Show which line your cursor is on
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 4
@@ -164,12 +165,28 @@ require("lazy").setup({
 		"EdenEast/nightfox.nvim",
 		event = "VimEnter",
 		config = function()
-			vim.cmd("sleep 1m")
-			local style = vim.o.background == "light" and "dawnfox" or "duskfox"
-			require("nightfox.config").set_fox(style)
+			require("nightfox").setup({
+				options = {
+					transparent = true,
+				},
+			})
 			require("nightfox").load()
+
+			require("light_switch").setup("~/.interface_style", {
+				light = "dawnfox",
+				dark = "duskfox",
+			})
 		end,
 	},
+
+	-- {
+	-- 	"seandewar/paragon.vim",
+	-- 	config = function()
+	-- 		vim.g.paragon_transparent_bg = true
+	-- 	end,
+	-- },
+
+	{ "tmux_panes.nvim", dev = true },
 
 	{ "tpope/vim-fugitive" },
 
@@ -485,7 +502,9 @@ require("lazy").setup({
 			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-			require("lspconfig").sourcekit.setup({})
+			if vim.loop.os_uname().sysname == "Darwin" then
+				require("lspconfig").sourcekit.setup({})
+			end
 			require("lspconfig").zls.setup({
 				cmd = { "zls" },
 				filetypes = { "zig", "zon" },
@@ -830,6 +849,9 @@ require("lazy").setup({
 	--    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
 	-- { import = 'custom.plugins' },
 }, {
+	dev = {
+		path = PLUGIN_DEV_PATH,
+	},
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the
 		-- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table

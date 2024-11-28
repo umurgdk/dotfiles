@@ -1,0 +1,5 @@
+general.import = [
+	"~/.config/alacritty/themes/brightfox.toml",
+	"~/.config/alacritty/base.toml"
+]
+

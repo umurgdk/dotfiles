@@ -1,0 +1,5 @@
+general.import = [
+	"~/.config/alacritty/themes/duskfox.toml",
+	"~/.config/alacritty/base.toml"
+]
+
