@@ -7,7 +7,7 @@ hide_when_typing = true
 
 [font]
 size = 13
-normal = { family = "ZedMono Nerd Font", style="medium"}
+normal = { family = "ZedMono Nerd Font", style="Medium"}
 # normal = { family = "MartianMono Nerd Font", style="Regular"}
 # normal = { family = "FantasqueSansM Nerd Font", style="Regular"}
 # normal = { family = "Iosevka Nerd Font", style="medium"}

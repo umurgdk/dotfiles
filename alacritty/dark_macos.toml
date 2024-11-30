@@ -1,0 +1,6 @@
+general.import = [
+	"~/.config/alacritty/dark.toml",
+	"~/.config/alacritty/macos.toml"
+]
+
+
