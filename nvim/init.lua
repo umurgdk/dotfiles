@@ -149,6 +149,34 @@ require("lazy").setup({
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 	"tpope/vim-dispatch",
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+		---@module 'render-markdown'
+		---@type render.md.UserConfig
+		opts = {},
+	},
+	{
+		"nvim-orgmode/orgmode",
+		event = "VeryLazy",
+		ft = { "org" },
+		config = function()
+			-- Setup orgmode
+			require("orgmode").setup({
+				org_agenda_files = "/archive/personal/notes/**/*",
+				org_default_notes_file = "/archive/personal/notes/refile.org",
+			})
+
+			-- NOTE: If you are using nvim-treesitter with ~ensure_installed = "all"~ option
+			-- add ~org~ to ignore_install
+			-- require('nvim-treesitter.configs').setup({
+			--   ensure_installed = 'all',
+			--   ignore_install = { 'org' },
+			-- })
+		end,
+	},
 	-- "thosakwe/vim-flutter",
 	-- "natebosch/vim-lsc",
 	-- "natebosch/vim-lsc-dart",
@@ -157,6 +185,21 @@ require("lazy").setup({
 		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
+		},
+		opts = {
+			lsp = {
+				color = {
+					enabled = true,
+				},
+				settings = {
+					lineLength = 100,
+				},
+			},
+			widget_guides = { enabled = true },
+			dev_log = {
+				enabled = true,
+				notify_errors = true,
+			},
 		},
 		config = true,
 	},

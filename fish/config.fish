@@ -3,3 +3,6 @@ if status is-interactive
 end
 
 direnv hook fish | source
+alias grep="rg"
+alias ls="eza"
+alias l="eza -l"
