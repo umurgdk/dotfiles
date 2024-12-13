@@ -15,7 +15,7 @@
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-(set-face-attribute 'default nil :font "JetBrains Mono" :height 160)
+(set-face-attribute 'default nil :font "ZedMono Nerd Font" :height 140 :weight 'medium)
 
 (load-theme 'wombat)
 
@@ -56,6 +56,25 @@
   :config
   (ivy-mode 1))
 
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+	 :map minibuffer-local-map
+	 ("C-r" . 'counsel-minibuffer-history)))
+
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1))
+
+(use-package helpful
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command]  . helpful-command)
+  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-key]      . helpful-key))
+
 (use-package doom-modeline
   :init
   (doom-modeline-mode 1)
@@ -69,7 +88,7 @@
   (doom-themes-enable-bold t)
   (doom-themes-enable-italic t)
   :config
-  (load-theme 'doom-flatwhite t)
+  (load-theme 'doom-dracula t)
   (doom-themes-visual-bell-config))
   
 
@@ -80,17 +99,13 @@
   :custom
   (which-key-idle-delay 0.3))
 
-(use-package counsel)
-(use-package ivy-rich
-  :init
-  (ivy-rich-mode 1))
-
 (use-package evil
   :custom
   (evil-want-integration t)
   (evil-want-keybinding nil)
   (evil-want-C-u-scroll t)
   (evil-want-C-i-jump t)
+
   :config
   (evil-mode 1)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
@@ -125,6 +140,35 @@
   (rune/leader-keys
     "wz" '(hydra-window-zoom/body :which-key "zoom")))
 
+(use-package projectile
+  :diminish projectile-mode
+  :config
+  (projectile-mode)
+  (rune/leader-keys
+    "p" '(projectile-command-map :which-key "project"))
+  :init
+  (setq projectile-project-search-path 
+    (pcase system-type
+      (gnu/linux '("~/src/" "~/work/nesim/rotatalk"))
+      (darwin    '("~/dev"))
+      (_         nil)))
+  (setq projectile-switch-project-action #'projectile-dired))
+
+(use-package counsel-projectile
+  :config (counsel-projectile-mode))
+
+(use-package magit
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-traditional)
+  :config
+  (rune/leader-keys
+    "g" '(:ignore g :which-key "magit")
+    "gs" '(magit-status :which-key "git status")
+    "gp" '(magit-pull-from-upstream :which-key "git pull origin")))
+
+(use-package forge)
+
+(use-package zig-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -132,10 +176,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(hydra doom-themes general evil-collection evil counsel ivy-rich which-key rainbow-delimiters rainbow-delimiter doom-modeline evil-mode swiper ivy command-log-mode)))
+   '(zig-mode forge evil-magit magit counsel-projectile helpful projectile hydra doom-themes general evil-collection evil counsel ivy-rich which-key rainbow-delimiters rainbow-delimiter doom-modeline evil-mode swiper ivy command-log-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
