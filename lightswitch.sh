@@ -14,9 +14,18 @@ switch_lights()
 			esac;;
 	esac
 
-	echo "alacritty_config=${alacritty_config}"
+	zellij_config="$HOME/.config/zellij/config.kdl"
 	echo "$scheme" > ~/.interface_style
 	ln -sf $HOME/.config/alacritty/${alacritty_config} $HOME/.config/alacritty/alacritty.toml
+
+	case "$scheme" in
+		dark) 
+			zellij_theme="$(sed -nE 's/.*\$lightswitch ([^\s]+) ([^\s]+)/\2/p' $zellij_config)";;
+		light)
+			zellij_theme="$(sed -nE 's/.*\$lightswitch ([^\s]+) ([^\s]+)/\1/p' $zellij_config)";;
+	esac
+
+	sed -E -i.bak "s/theme \"[^\"]+\"/theme \"$zellij_theme\"/" $zellij_config
 }
 
 if [ -z "$1" ]; then

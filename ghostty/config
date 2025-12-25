@@ -1,0 +1,8 @@
+# config-file = nightfox-dayfox
+theme = dark:Catppuccin Mocha,light:Catppuccin Latte
+font-family = "ZedMono Nerd Font Mono"
+font-thicken = true
+font-size = 16
+
+macos-option-as-alt = left
+# command = shell:"fish -c zellij"
