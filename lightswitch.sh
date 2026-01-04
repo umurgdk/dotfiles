@@ -20,9 +20,9 @@ switch_lights()
 
 	case "$scheme" in
 		dark) 
-			zellij_theme="$(sed -nE 's/.*\$lightswitch ([^\s]+) ([^\s]+)/\2/p' $zellij_config)";;
+			zellij_theme="catppuccin-macchiato";;
 		light)
-			zellij_theme="$(sed -nE 's/.*\$lightswitch ([^\s]+) ([^\s]+)/\1/p' $zellij_config)";;
+			zellij_theme="catppuccin-latte";;
 	esac
 
 	sed -E -i.bak "s/theme \"[^\"]+\"/theme \"$zellij_theme\"/" $zellij_config
