@@ -14,6 +14,8 @@ vim.o.termguicolors = true
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+vim.opt.exrc = true
+
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -174,19 +176,25 @@ require("lazy").setup({
 
       dap.adapters.lldb = {
         type = 'executable',
-        command = '/opt/homebrew/opt/llvm/bin/lldb-dap',
+        command = 'lldb-dap',
         name = 'lldb',
       }
 
       dap.configurations.zig = {
         {
-          name = 'Launch',
+          name = 'launch',
           type = 'lldb',
           request = 'launch',
           program = '${workspaceFolder}/zig-out/bin/${workspaceFolderBasename}',
           stopOnEntry = false,
           cwd = '${workspaceFolder}',
         },
+        {
+          name = 'attach',
+          type = 'lldb',
+          request = 'attach',
+          program = '${workspaceFolder}/zig-out/bin/${workspaceFolderBasename}',
+        }
       }
 
       dapui.setup();
@@ -839,7 +847,7 @@ require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		opts = {
-			ensure_installed = { "bash", "c", "html", "lua", "luadoc", "markdown", "vim", "vimdoc" },
+			ensure_installed = { "bash", "c", "html", "lua", "luadoc", "markdown", "vim", "vimdoc", "zig", "cpp" },
 			-- Autoinstall languages that are not installed
 			auto_install = true,
 			highlight = {
@@ -855,7 +863,7 @@ require("lazy").setup({
 			-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 
 			---@diagnostic disable-next-line: missing-fields
-			require("nvim-treesitter.configs").setup(opts)
+			-- require("nvim-treesitter.configs").setup(opts)
 
 			-- There are additional nvim-treesitter modules that you can use to interact
 			-- with nvim-treesitter. You should go explore a few and see what interests you:

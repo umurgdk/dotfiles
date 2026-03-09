@@ -17,5 +17,11 @@ set -gx ANDROID_NDK $ANDROID_SDK/ndk/$ANDROID_NDK_VERSION
 set -gx ANDROID_NDK_SYSROOT $ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64/sysroot
 
 fish_add_path $ANDROID_SDK/emulator
+fish_add_path $HOME/.local/bin
 
 set -gx DOTNET_ROOT /opt/homebrew/opt/dotnet/libexec
+
+# ZVM
+set -gx ZVM_INSTALL "$HOME/.zvm/self"
+set -gx PATH $PATH "$HOME/.zvm/bin"
+set -gx PATH $PATH "$ZVM_INSTALL/"
