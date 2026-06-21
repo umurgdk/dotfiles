@@ -1,5 +1,5 @@
 # config-file = nightfox-dayfox
-theme = dark:catppuccin-mocha.conf,light:catppuccin-latte.conf
+theme = dark:catppuccin-mocha,light:catppuccin-latte
 # font-family = "ZedMono Nerd Font Mono"
 font-thicken = true
 font-size = 12
@@ -7,3 +7,31 @@ font-size = 12
 # window-decoration = none
 macos-option-as-alt = left
 # command = shell:"fish -c zellij"
+
+keybind = performable:ctrl+shift+c=copy_to_clipboard
+
+# KEYBINDS : SPLITS
+keybind = alt+p>n=new_split:auto
+keybind = alt+p>shift+l=new_split:right
+keybind = alt+p>shift+j=new_split:down
+keybind = alt+p>f=toggle_split_zoom
+
+# KEYBINDS : SPLITS - FOCUS
+keybind = alt+h=goto_split:left
+keybind = alt+j=goto_split:down
+keybind = alt+k=goto_split:up
+keybind = alt+l=goto_split:right
+keybind = alt+[=goto_split:previous
+keybind = alt+]=goto_split:next
+
+# KEYBINDS : SPLITS - RESIZE
+keybind = alt+shift+h=resize_split:left,30
+keybind = alt+shift+j=resize_split:down,30
+keybind = alt+shift+k=resize_split:up,30
+keybind = alt+shift+l=resize_split:right,30
+
+# KEYBINDS : TABS
+keybind = alt+t>n=new_tab
+keybind = alt+t>r=prompt_tab_title
+keybind = alt+shift+[=previous_tab
+keybind = alt+shift+]=next_tab

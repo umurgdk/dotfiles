@@ -1,0 +1,14 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Android Emulator
+GenericName=Android Emulator
+Comment=Run Android apps in an emulator
+Exec=emulator -avd pixel9 -netdelay none -netspeed full
+Icon=phone
+Terminal=false
+Categories=Development;Emulator;Android;
+Keywords=android;emulator;mobile;app;
+StartupNotify=true
+StartupWMClass=emulator

@@ -10,6 +10,8 @@ input {
             //layout "us" // Use the American keyboard layout
         }
         numlock // Enable numlock on startup
+        repeat-delay 50
+        repeat-rate 100
     }
 
     touchpad {

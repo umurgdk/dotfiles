@@ -1,0 +1,30 @@
+[core]
+    pager = "nvim -R -c 'nnoremap q :q!<CR>' -"
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /opt/1Password/op-ssh-sign
+[commit]
+	gpgsign = true
+[user]
+	name = Umur Gedik
+	email = umurgdk@gmail.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID9qV1XvFq1Uhi6v+Q7s6d50VnCfjGLA/VTvnoteF1c/
+[init]
+	defaultBranch = main
+
+[url "git@github.com:"]
+	insteadOf = ghs:
+
+[url "https://github.com/"]
+	insteadOf = gh:
+
+[url "git@git.sr.ht:~"]
+	insteadOf = sh:
+[diff]
+	color = never
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process

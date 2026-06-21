@@ -1,0 +1,20 @@
+/* Light mode theme. Bar stays dark; focused workspace gets a very light bg. */
+
+/* Bar background is always dark. */
+@define-color bar-bg rgba(24, 24, 32, 0.96);
+
+/* Status widgets / generic foreground: light, no background. */
+@define-color module-fg rgba(255, 255, 255, 0.92);
+@define-color accent-fg  #ffffff;
+@define-color warning-fg #f0c674;
+@define-color critical-fg #fb4934;
+
+/* Focused workspace: very light background, dark text. */
+@define-color ws-focused-bg #f2f2f2;
+@define-color ws-focused-fg #1a1a1a;
+
+/* Not-focused workspaces: no background, slightly dimmed light foreground. */
+@define-color ws-inactive-fg rgba(255, 255, 255, 0.55);
+
+@define-color ws-hover-bg rgba(255, 255, 255, 0.12);
+@define-color ws-urgent-bg #f0c674;

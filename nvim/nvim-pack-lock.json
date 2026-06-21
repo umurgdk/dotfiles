@@ -1,0 +1,76 @@
+{
+  "plugins": {
+    "blink.cmp": {
+      "rev": "f22f66eb7c4d037ed523a78b27ee235b7bc9a1f4",
+      "src": "gh:Saghen/blink.cmp"
+    },
+    "cmp-nvim-lsp": {
+      "rev": "cbc7b02bb99fae35cb42f514762b89b5126651ef",
+      "src": "gh:hrsh7th/cmp-nvim-lsp.git"
+    },
+    "coq_nvim": {
+      "rev": "d939a34ceb2b57d2937890337a4aa75eb55e18a8",
+      "src": "gh:ms-jpq/coq_nvim"
+    },
+    "mini.nvim": {
+      "rev": "adeaeac8622b966273bb161977bff1293dd44565",
+      "src": "gh:nvim-mini/mini.nvim"
+    },
+    "neo-tree.nvim": {
+      "rev": "4597f1e0b928a78d5fe1b3d33d1a5141453ba839",
+      "src": "gh:nvim-neo-tree/neo-tree.nvim"
+    },
+    "nui.nvim": {
+      "rev": "de740991c12411b663994b2860f1a4fd0937c130",
+      "src": "gh:MunifTanjim/nui.nvim"
+    },
+    "nvim": {
+      "rev": "12c004cde3f36cb1d57242f1e6aac46b09a0e5b4",
+      "src": "gh:catppuccin/nvim"
+    },
+    "nvim-cmp": {
+      "rev": "da88697d7f45d16852c6b2769dc52387d1ddc45f",
+      "src": "gh:hrsh7th/nvim-cmp.git"
+    },
+    "nvim-dap": {
+      "rev": "a9d8cb68ee7184111dc66156c4a2ebabfbe01bc5",
+      "src": "gh:mfussenegger/nvim-dap"
+    },
+    "nvim-dap-ui": {
+      "rev": "cf91d5e2d07c72903d052f5207511bf7ecdb7122",
+      "src": "gh:rcarriga/nvim-dap-ui"
+    },
+    "nvim-nio": {
+      "rev": "21f5324bfac14e22ba26553caf69ec76ae8a7662",
+      "src": "gh:nvim-neotest/nvim-nio"
+    },
+    "nvim-tree.lua": {
+      "rev": "e1ad8b96834779b4c2674ef83be3f1a4ed007358",
+      "src": "gh:nvim-tree/nvim-tree.lua"
+    },
+    "nvim-treesitter": {
+      "rev": "493890b87a81dfe6a7e577dbc364ae33fa482da9",
+      "src": "gh:nvim-treesitter/nvim-treesitter"
+    },
+    "nvim-window-picker": {
+      "rev": "6382540b2ae5de6c793d4aa2e3fe6dbb518505ec",
+      "src": "gh:s1n7ax/nvim-window-picker"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
+      "src": "gh:nvim-lua/plenary.nvim"
+    },
+    "render-markdown.nvim": {
+      "rev": "c7188a8f9d2953696b6303caccbf39c51fa2c1b1",
+      "src": "gh:MeanderingProgrammer/render-markdown.nvim"
+    },
+    "telescope.nvim": {
+      "rev": "5255aa27c422de944791318024167ad5d40aad20",
+      "src": "gh:nvim-telescope/telescope.nvim"
+    },
+    "vim-fugitive": {
+      "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
+      "src": "gh:tpope/vim-fugitive"
+    }
+  }
+}

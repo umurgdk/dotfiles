@@ -1,0 +1,96 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 4,
+
+    "modules-left": [
+        "niri/workspaces"
+    ],
+    "modules-center": [
+        "niri/window"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "cpu",
+        "memory",
+        "battery",
+        "clock",
+        "tray"
+    ],
+
+    "niri/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "一",
+            "2": "二",
+            "3": "三",
+            "4": "四",
+            "5": "五",
+            "6": "六",
+            "7": "七",
+            "8": "八",
+            "9": "九",
+            "10": "十",
+            "default": "{value}"
+        }
+    },
+
+    "niri/window": {
+        "format": "{title}",
+        "max-length": 80,
+        "tooltip": false
+    },
+
+    "pulseaudio": {
+        "format": "{icon}{volume}%",
+        "format-muted": "{icon}",
+        "format-icons": {
+            "headphone": "<span face='JetBrainsMono Nerd Font' > </span>",
+            "hands-free": "<span face='JetBrainsMono Nerd Font' >󰋋 </span>",
+            "headset": "<span face='JetBrainsMono Nerd Font' >󰋋 </span>",
+            "default": ["<span face='JetBrainsMono Nerd Font'> </span>", "<span face='JetBrainsMono Nerd Font'> </span>", "<span face='JetBrainsMono Nerd Font'> </span>"]
+        },
+        "on-click": "pavucontrol"
+    },
+
+    "network": {
+        "format-wifi": "<span face='JetBrainsMono Nerd Font' > </span>{essid} ({signalStrength}%)",
+        "format-ethernet": "<span face='JetBrainsMono Nerd Font' >󰈀 </span>{ipaddr}",
+        "format-linked": "<span face='JetBrainsMono Nerd Font' > </span>{ifname} (No IP)",
+        "format-disconnected": "<span face='JetBrainsMono Nerd Font' > </span>Disconnected",
+        "tooltip-format": "{ifname} via {gwaddr}"
+    },
+
+    "cpu": {
+        "format": "<span face='JetBrainsMono Nerd Font' > </span>{usage}%",
+        "tooltip": false
+    },
+
+    "memory": {
+        "format": "<span face='JetBrainsMono Nerd Font' >󰍛 </span>{}%"
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}{capacity}%",
+        "format-charging": "<span face='JetBrainsMono Nerd Font' > </span>{capacity}%",
+        "format-plugged": "<span face='JetBrainsMono Nerd Font' > </span>{capacity}%",
+        "format-icons": ["<span face='JetBrainsMono Nerd Font' > </span>", "<span face='JetBrainsMono Nerd Font' > </span>", "<span face='JetBrainsMono Nerd Font' > </span>", "<span face='JetBrainsMono Nerd Font' > </span>", "<span face='JetBrainsMono Nerd Font' > </span>"]
+    },
+
+    "clock": {
+        "format": "{:%a %d %b  %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+
+    "tray": {
+        "spacing": 10
+    }
+}
