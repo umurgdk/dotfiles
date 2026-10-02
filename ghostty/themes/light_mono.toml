@@ -1,0 +1,26 @@
+# c0c0c0
+
+palette = 0=#000000
+palette = 1=#000000
+palette = 2=#555555
+palette = 3=#000000
+palette = 4=#000000
+palette = 5=#000000
+palette = 6=#000000
+palette = 7=#000000
+palette = 8=#000000
+palette = 9=#000000
+palette = 10=#000000
+palette = 11=#000000
+palette = 12=#000000
+palette = 13=#000000
+palette = 14=#000000
+palette = 15=#000000
+background = ffffff
+foreground = 000000
+cursor-color = 000000
+cursor-text = ffffff
+selection-background = f3f3b4
+selection-foreground = 000000
+split-divider-color = ddddbb
+

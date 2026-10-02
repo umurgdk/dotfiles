@@ -1,0 +1,18 @@
+include "environment.kdl"
+include "input.kdl"
+include "output.kdl"
+include "layout.kdl"
+include "misc.kdl"
+include "animations.kdl"
+include "window-rules.kdl"
+include "key_binds.kdl"
+
+// Dark mode colors
+layout {
+    background-color "#111"
+    border {
+        active-color "#352a11"
+        inactive-color "#1a1505"
+        urgent-color "#9b0000"
+    }
+}

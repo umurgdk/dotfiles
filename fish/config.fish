@@ -57,6 +57,12 @@ fish_add_path $ANDROID_SDK/platform-tools
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.zvm/bin
 fish_add_path $HOME/.zvm/self
+fish_add_path /data/devtools/compilers/slang-2026.14.1/bin
 
 # opencode
 fish_add_path /home/umurgdk/.opencode/bin
+
+# ZVM
+set -gx ZVM_INSTALL "$HOME/.zvm/self"
+set -gx PATH $PATH "$HOME/.zvm/bin"
+set -gx PATH $PATH "$ZVM_INSTALL/"

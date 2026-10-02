@@ -1,0 +1,11 @@
+environment {
+	ELECTRON_OZONE_PLATFORM_HINT "auto"
+	QT_QPA_PLATFORM "wayland"
+	QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+	XDG_SESSION_TYPE "wayland"
+	XDG_CURRENT_DESKTOP "niri"
+	// "kde" (plasma-integration) makes Qt/KDE apps read colors from
+	// kdeglobals + use the Breeze style, so they follow darkman's
+	// light/dark color-scheme switch instead of GTK3's palette.
+	QT_QPA_PLATFORMTHEME "kde"
+}

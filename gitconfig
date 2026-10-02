@@ -1,11 +1,11 @@
 [core]
     pager = "nvim -R -c 'nnoremap q :q!<CR>' -"
-[gpg]
-	format = ssh
-[gpg "ssh"]
-	program = /opt/1Password/op-ssh-sign
-[commit]
-	gpgsign = true
+; [gpg]
+; 	format = ssh
+; [gpg "ssh"]
+; 	program = /opt/1Password/op-ssh-sign
+; [commit]
+; 	gpgsign = true
 [user]
 	name = Umur Gedik
 	email = umurgdk@gmail.com
@@ -21,6 +21,10 @@
 
 [url "git@git.sr.ht:~"]
 	insteadOf = sh:
+
+[url "ssh://git@codeberg.org/"]
+    insteadOf = cb:
+
 [diff]
 	color = never
 [filter "lfs"]
@@ -28,3 +32,9 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /opt/1Password/op-ssh-sign
+[commit]
+	gpgsign = true

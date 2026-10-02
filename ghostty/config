@@ -1,6 +1,6 @@
 # config-file = nightfox-dayfox
-theme = dark:catppuccin-mocha,light:catppuccin-latte
-# font-family = "ZedMono Nerd Font Mono"
+theme = dark:dark_mono.toml,light:light_mono.toml
+font-family = "JetBrainsMono Nerd Font"
 font-thicken = true
 font-size = 12
 

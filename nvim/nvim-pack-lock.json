@@ -56,6 +56,10 @@
       "rev": "6382540b2ae5de6c793d4aa2e3fe6dbb518505ec",
       "src": "gh:s1n7ax/nvim-window-picker"
     },
+    "orgmode": {
+      "rev": "f32a06d4b5399dad8bf0478c772bf6c513f02dcf",
+      "src": "gh:nvim-orgmode/orgmode"
+    },
     "plenary.nvim": {
       "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
       "src": "gh:nvim-lua/plenary.nvim"

@@ -1,25 +1,31 @@
-// ────────────── Input Configuration ──────────────
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Input
-
 input {
     keyboard {
         xkb {
             options "caps:escape"
-            //If you want to overwrite your keyboard layout,
-            // uncomment the line below and change the layout accordingly.
-            //layout "us" // Use the American keyboard layout
         }
-        numlock // Enable numlock on startup
-        repeat-delay 50
-        repeat-rate 100
+
+        numlock
+        repeat-delay 250
+        repeat-rate  25
     }
 
     touchpad {
-        tap // Enable tap-to-click
-        natural-scroll // Enable natural (macOS-style) scrolling
+        tap
+        natural-scroll
+        scroll-factor horizontal=1.0 vertical=0.5
+        click-method "clickfinger"
     }
 
-    focus-follows-mouse // Automatically focus windows under the mouse pointer
-    workspace-auto-back-and-forth // Enable workspace back & forth switching
-}
+    mouse {
+        accel-speed -0.5
+        natural-scroll
+        scroll-factor 1.5
+    }
 
+    trackpoint {
+    }
+
+    tablet {
+        map-to-output "eDP-1"
+    }
+}

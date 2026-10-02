@@ -1,0 +1,18 @@
+include "environment.kdl"
+include "input.kdl"
+include "output.kdl"
+include "layout.kdl"
+include "misc.kdl"
+include "animations.kdl"
+include "window-rules.kdl"
+include "key_binds.kdl"
+
+// Light mode colors
+layout {
+    background-color "#FFFFEA"
+    border {
+        active-color "#333333"
+        inactive-color "#bdbaa1"
+        urgent-color "#cc3333"
+    }
+}

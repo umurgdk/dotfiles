@@ -42,6 +42,7 @@ input {
         // drag-lock
         natural-scroll
         scroll-factor horizontal=1.0 vertical=0.5
+        click-method "clickfinger"
         // accel-speed 0.2
         // accel-profile "flat"
         // scroll-method "two-finger"
@@ -119,6 +120,8 @@ layout {
     // Set gaps around windows in logical pixels.
     gaps 8
 
+    background-color "#111"
+
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
     //   or right edge of the screen.
@@ -162,7 +165,7 @@ layout {
     // You can change how the focus ring looks.
     focus-ring {
         // Uncomment this line to disable the focus ring.
-        // off
+        off
 
         // How many logical pixels the ring extends out from the windows.
         width 2
@@ -173,13 +176,13 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "#7fc8ff"
+        active-color "#aa9966"
 
         // Color of the ring on inactive monitors.
         //
         // The focus ring only draws around the active window, so the only place
         // where you can see its inactive-color is on other monitors.
-        inactive-color "#505050"
+        inactive-color "#665522"
 
         // You can also use gradients. They take precedence over solid colors.
         // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
@@ -201,11 +204,11 @@ layout {
     border {
         // The settings are the same as for the focus ring.
         // If you enable the border, you probably want to disable the focus ring.
-        off
+        on
 
-        width 2
-        active-color "#ffc87f"
-        inactive-color "#505050"
+        width 4
+        active-color "#352a11"
+        inactive-color "#1a1505"
 
         // Color of the border around windows that request your attention.
         urgent-color "#9b0000"
@@ -221,7 +224,7 @@ layout {
     // You can enable drop shadows for windows.
     shadow {
         // Uncomment the next line to enable shadows.
-        // on
+        on
 
         // By default, the shadow draws only around its window, and not behind it.
         // Uncomment this setting to make the shadow draw behind its window.

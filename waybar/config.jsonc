@@ -2,14 +2,15 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 30,
-    "spacing": 4,
+    "height": 32,
+    "spacing": 8,
 
     "modules-left": [
-        "niri/workspaces"
+        "niri/workspaces",
+        "niri/window"
     ],
     "modules-center": [
-        "niri/window"
+        "custom/nowplaying"
     ],
     "modules-right": [
         "pulseaudio",
@@ -20,6 +21,14 @@
         "clock",
         "tray"
     ],
+
+    "custom/nowplaying": {
+        "exec": "playerctl metadata --format '{{ artist }} - {{ title }}' 2>/dev/null",
+        "exec-if": "playerctl status 2>/dev/null",
+        "interval": 1,
+        "return-type": "text",
+        "on-click": "playerctl play-pause"
+    },
 
     "niri/workspaces": {
         "format": "{icon}",
@@ -40,37 +49,37 @@
 
     "niri/window": {
         "format": "{title}",
-        "max-length": 80,
+        "max-length": 120,
         "tooltip": false
     },
 
     "pulseaudio": {
-        "format": "{icon}{volume}%",
-        "format-muted": "{icon}",
+        "format": "{icon}  {volume}%",
+        "format-muted": "{icon}  Muted",
         "format-icons": {
-            "headphone": "<span face='JetBrainsMono Nerd Font' > </span>",
-            "hands-free": "<span face='JetBrainsMono Nerd Font' >󰋋 </span>",
-            "headset": "<span face='JetBrainsMono Nerd Font' >󰋋 </span>",
-            "default": ["<span face='JetBrainsMono Nerd Font'> </span>", "<span face='JetBrainsMono Nerd Font'> </span>", "<span face='JetBrainsMono Nerd Font'> </span>"]
+            "headphone": "<span face='JetBrainsMono Nerd Font' ></span>",
+            "hands-free": "<span face='JetBrainsMono Nerd Font' >󰋋</span>",
+            "headset": "<span face='JetBrainsMono Nerd Font' >󰋋</span>",
+            "default": ["<span face='JetBrainsMono Nerd Font'></span>"/* , "<span face='JetBrainsMono Nerd Font'> </span>", "<span face='JetBrainsMono Nerd Font'> </span>" */]
         },
         "on-click": "pavucontrol"
     },
 
     "network": {
-        "format-wifi": "<span face='JetBrainsMono Nerd Font' > </span>{essid} ({signalStrength}%)",
-        "format-ethernet": "<span face='JetBrainsMono Nerd Font' >󰈀 </span>{ipaddr}",
-        "format-linked": "<span face='JetBrainsMono Nerd Font' > </span>{ifname} (No IP)",
-        "format-disconnected": "<span face='JetBrainsMono Nerd Font' > </span>Disconnected",
-        "tooltip-format": "{ifname} via {gwaddr}"
+        "format-wifi": "<span face='JetBrainsMono Nerd Font' > </span> {essid}",
+        "format-ethernet": "<span face='JetBrainsMono Nerd Font' >󰈀 </span> {ipaddr}",
+        "format-linked": "<span face='JetBrainsMono Nerd Font' > </span> {ifname} (No IP)",
+        "format-disconnected": "<span face='JetBrainsMono Nerd Font' > </span> Disconnected",
+        "tooltip-format": "{ifname}\n{ipaddr}\nSignal: {signalStrength}%"
     },
 
     "cpu": {
-        "format": "<span face='JetBrainsMono Nerd Font' > </span>{usage}%",
+        "format": "CPU: {usage}%",
         "tooltip": false
     },
 
     "memory": {
-        "format": "<span face='JetBrainsMono Nerd Font' >󰍛 </span>{}%"
+        "format": "MEM: {}%"
     },
 
     "battery": {
@@ -78,10 +87,9 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon}{capacity}%",
-        "format-charging": "<span face='JetBrainsMono Nerd Font' > </span>{capacity}%",
-        "format-plugged": "<span face='JetBrainsMono Nerd Font' > </span>{capacity}%",
-        "format-icons": ["<span face='JetBrainsMono Nerd Font' > </span>", "<span face='JetBrainsMono Nerd Font' > </span>", "<span face='JetBrainsMono Nerd Font' > </span>", "<span face='JetBrainsMono Nerd Font' > </span>", "<span face='JetBrainsMono Nerd Font' > </span>"]
+        "format": "BAT: {capacity}%",
+        "format-charging": "BAT: +{capacity}%",
+        "format-plugged": "BAT: {capacity}%",
     },
 
     "clock": {
@@ -91,6 +99,7 @@
     },
 
     "tray": {
-        "spacing": 10
+        "spacing": 10,
+        "icon-size": 16
     }
 }

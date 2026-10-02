@@ -1,5 +1,3 @@
-local colorscheme = "catppuccin"
-
 vim.pack.add({
     "gh:catppuccin/nvim",
     "gh:nvim-lua/plenary.nvim",
@@ -9,6 +7,7 @@ vim.pack.add({
     "gh:Saghen/blink.cmp",
     "gh:MeanderingProgrammer/render-markdown.nvim",
 
+    "gh:nvim-orgmode/orgmode",
     "gh:tpope/vim-fugitive",
 
     -- mini.nvim
@@ -30,7 +29,40 @@ require('keybind')
 require('autocmds')
 
 require('catppuccin').setup({})
-require('nvim-treesitter').setup({})
+
+require('telescope').setup({
+    defaults = {
+        results_title = false,
+        prompt_title = false,
+        dynamic_preview_title = true,
+        path_display = {
+            shorten = 2,
+            smart = {},
+        },
+        border = true,
+        selection_caret = "",
+        entry_prefix = "",
+        wrap_results = false,
+        sorting_strategy = 'ascending',
+        borderchars = {
+            prompt = { " " },
+            results = { " " },
+            preview = { " " },
+        },
+        layout_strategy = 'flex',
+        layout_config = {
+            width = { padding = 0 },
+            height = { padding = 0 },
+            prompt_position = "top",
+            vertical = {
+                mirror = true,
+            },
+            horizontal = {
+                preview_width = 0.60
+            },
+        },
+    },
+})
 
 require('mini.pairs').setup()
 require('mini.icons').setup({ style = "glyph" })
@@ -94,85 +126,41 @@ miniclue.setup({
     }
 });
 
+require('orgmode').setup({})
+
 -- Setup mini.files and extra configuration
 require("file_browser")
-require("blink.cmp").setup({
-    keymap = { preset = "super-tab" },
-    appearance = { nerd_font_variant = "normal" },
-    snippets = { preset = "mini_snippets" },
-    sources = {
-        default = { "lsp", "path", "snippets" },
-        providers = {
-            path = {
-                opts = {
-                    get_cwd = function(_)
-                        return vim.fn.getcwd()
-                    end,
-                },
-            },
-        },
-    },
-    fuzzy = {
-        sorts = {
-            "exact",
-            "score",
-            "sort_text",
-        },
-        implementation = "prefer_rust_with_warning",
-    },
-    signature = {
-        enabled = true,
-        window = {
-            border = "single",
-        }
-    },
-    completion = {
-        ghost_text = { enabled = true },
-        keyword = { range = "full" },
-        trigger = {
-            show_on_blocked_trigger_characters = { " ", "\n", "\t" },
-        },
-        menu = {
-            border = "single",
-            draw = {
-                components = {
-                    kind_icon = {
-                        text = function(ctx)
-                            local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-                            return kind_icon
-                        end
-                    }
-                }
-            },
-        },
-        documentation = {
-            auto_show = true,
-            auto_show_delay_ms = 0,
-            window = { border = "single" },
-        }
-    }
-})
 
 -- require("markdown").setup({})
 
 vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
 vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true })
 
-vim.cmd.colorscheme(colorscheme)
+local colorscheme_file = vim.fn.expand("$HOME") .. "/.local/state/darkman/colorscheme"
 
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "kotlin", "lua", "c", "cpp", "swift", "zig" },
-    callback = function()
-        vim.treesitter.start()
-        vim.wo.foldexpr = "v:lua.require'folding'.foldexpr()"
-        vim.wo.foldmethod = "expr"
+local function read_colorscheme()
+  local f = io.open(colorscheme_file, "r")
+  if not f then return nil end
+  local content = f:read("*l")
+  f:close()
+  if content == "dark" then return "dark_mono" end
+  if content == "light" then return "light_mono" end
+  return nil
+end
 
-        local indentexpr = require('nvim-treesitter').indentexpr()
-        if indentexpr ~= 0 then
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        end
-    end
-})
+local function apply_colorscheme()
+  local cs = read_colorscheme() or "dark_mono"
+  if vim.g.colors_name ~= cs then
+    vim.cmd.colorscheme(cs)
+  end
+end
+
+local handle = vim.uv.new_fs_event()
+handle:start(colorscheme_file, { watch_entry = true }, vim.schedule_wrap(function()
+  apply_colorscheme()
+end))
+
+apply_colorscheme()
 
 -------------------------------------------------------------------------------
 -- region: Configure DAP Debug Adapter Protocol
@@ -199,81 +187,3 @@ end
 dap.listeners.before.event_exited.dapui_config = function()
     dapui.close()
 end
-
--------------------------------------------------------------------------------
--- Configure LSP
---
-local lsp = vim.lsp
-local blink = require("blink.cmp")
-local capabilities = lsp.protocol.make_client_capabilities()
-capabilities = vim.tbl_deep_extend("force", capabilities, blink.get_lsp_capabilities({}, false))
-capabilities = vim.tbl_deep_extend("force", capabilities, {
-    textDocument = {
-        foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
-        }
-    }
-})
-
-lsp.config("*", { capabilities = capabilities })
-
-function lsp_config(name, opts)
-    lsp.config(name, opts)
-    lsp.enable(name)
-end
-
-lsp_config("kotlin-lsp", {
-    cmd = {
-        "/data/devtools/lsp/kotlin-lsp-262.1668.0-linux-x64/kotlin-lsp.sh",
-        "--stdio"
-    },
-    filetypes = { "kotlin" },
-    root_markers = { "settings.gradle.kts", "build.gradle.kts", ".git" },
-})
-
-lsp_config("zls", {
-    cmd = { "zls" },
-    filetypes = { "zig" },
-    root_markers = { "build.zig" },
-})
-
-lsp_config("lua_ls", {
-    cmd = { "/data/devtools/lsp/lua-language-server-3.17.1/bin/lua-language-server" },
-    filetypes = { "lua" },
-    root_markers = { "init.lua" },
-})
-
-vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("my.lsp", {}),
-    callback = function(ev)
-        local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
-
-        -- Auto-format ("lint") on save.
-        -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
-        if client:supports_method('textDocument/formatting') then
-            vim.api.nvim_create_autocmd('BufWritePre', {
-                group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
-                buffer = ev.buf,
-                callback = function()
-                    vim.lsp.buf.format({ bufnr = ev.buf, id = client.id, timeout_ms = 1000 })
-                end,
-            })
-        end
-    end
-})
-
-vim.api.nvim_create_autocmd("LspDetach", {
-    callback = function(args)
-        -- Get the detaching client
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-        -- Remove the autocommand to format the buffer on save, if it exists
-        if client:supports_method('textDocument/formatting') then
-            vim.api.nvim_clear_autocmds({
-                event = 'BufWritePre',
-                buffer = args.buf,
-            })
-        end
-    end
-})
